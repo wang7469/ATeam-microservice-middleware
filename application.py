@@ -12,18 +12,17 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.get("/notify", methods=["POST"])
+@app.route("/notify", methods=["POST"])
 def get_comment_info():
-    content_type = request.headers.get('Content-Type')
-        if content_type == 'application/json':
-            new_comment = request.json 
-            blog_owner = new_comment["blog_owner"]
-            comment_poster = new_comment["comment_poster"]
-            print("server received blog owner and comment poster info")
+    # content_type = request.headers.get('Content-Type')
+    # if content_type == 'application/json':
+    #     new_comment = request.json 
+    #     blog_owner = new_comment["blog_owner"]
+    #     comment_poster = new_comment["comment_poster"]
+    #     print("server received blog owner and comment poster info")
 
     # DFF TODO Explain status codes, content type, ... ...
-    result = Response(json.dumps(msg), status=200, content_type="application/json")
-
+    result = Response(json.dumps(""), status=200, content_type="application/json")
     return result
 
 
