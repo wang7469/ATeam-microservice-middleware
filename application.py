@@ -21,8 +21,12 @@ def get_comment_info():
     #     comment_poster = new_comment["comment_poster"]
     #     print("server received blog owner and comment poster info")
 
+        # result = DatabaseOperations.new_notification(blog_owner, comment_poster)
+        # return result
+
+
     # DFF TODO Explain status codes, content type, ... ...
-    result = Response(json.dumps(""), status=200, content_type="application/json")
+    result = Response("added success", status=200, content_type="application/json")
     return result
 
 
