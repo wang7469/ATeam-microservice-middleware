@@ -28,7 +28,8 @@ def add_comment_info():
 def get_comment_info():
     username = request.args.get('username')
     count = DatabaseOperations.count_notification(username)
-    return Response(count, status=200, content_type="application/json")
+    print(count)
+    return Response(str(count), status=200, content_type="application/json")
 
 @app.route("/getnotificationinfo", methods=["GET"])
 def get_notification_info():

@@ -90,6 +90,7 @@ class DatabaseOperations:
         cur = conn.cursor()
         res = cur.execute(sql, args=(blog_owner))
         result = cur.fetchall()
+        print(result)
         if result:
             success_response = Response(json.dumps(result), status=200, content_type="application.json")
             return success_response
