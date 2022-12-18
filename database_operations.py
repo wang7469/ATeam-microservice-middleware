@@ -17,7 +17,8 @@ class DatabaseOperations:
 
         usr = "root"
         pw = "84443295412lx."
-        h = "localhost"
+        # h = "localhost"
+        h = "ateam-db-final.ciqe1mhtaul1.us-east-1.rds.amazonaws.com"
 
         conn = pymysql.connect(
             user=usr,
