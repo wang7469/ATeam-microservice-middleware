@@ -37,6 +37,7 @@ class DatabaseOperations:
         cur = conn.cursor()
         res = cur.execute(sql, args=(blog_id))
         blog_data = cur.fetchone()
+        conn.close()
         owner_id = blog_data['OWNER_ID']
         blog_title = blog_data['blog_title']
         return owner_id, blog_title
@@ -48,6 +49,7 @@ class DatabaseOperations:
 
         cur = conn.cursor()
         res = cur.execute(sql, args=(blog_owner, comment_poster, blog_title))
+        conn.close()
         if res:
             new_notification_created = {'status': 'success', 'message': 'Successfully inserted new notification into database'}
             success_response = Response(json.dumps(new_notification_created), status=200, content_type="application.json")
@@ -64,6 +66,7 @@ class DatabaseOperations:
 
         cur = conn.cursor()
         res = cur.execute(sql, args=(blog_owner))
+        conn.close()
         if res:
             notification_deleted = {'status': 'success', 'message': 'Successfully deleted notifications'}
             success_response = Response(json.dumps(notification_deleted), status=200, content_type="application.json")
@@ -81,6 +84,7 @@ class DatabaseOperations:
         cur = conn.cursor()
         res = cur.execute(sql, args=(blog_owner))
         result = cur.fetchone()["COUNT(*)"]
+        conn.close()
         return result
 
     @staticmethod
@@ -91,6 +95,7 @@ class DatabaseOperations:
         cur = conn.cursor()
         res = cur.execute(sql, args=(blog_owner))
         result = cur.fetchall()
+        conn.close()
         print(result)
         if result:
             success_response = Response(json.dumps(result), status=200, content_type="application.json")
