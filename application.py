@@ -3,7 +3,11 @@ from datetime import datetime
 import json
 from database_operations import DatabaseOperations
 from flask_cors import CORS
+from google.oauth2 import id_token
+from google.auth.transport import requests
 import sys
+
+CLIENT_ID = "917121905012-jt7do84gpaurpefgsljbme3dqes29gim.apps.googleusercontent.com"
 
 
 # Create the Flask application object.
@@ -18,11 +22,18 @@ def add_comment_info():
     if content_type == 'application/json':
         new_comment = request.json 
         blog_id = new_comment["blog_id"]
-        comment_poster = new_comment["comment_poster"]
-        print("server received blog owner and comment poster info", blog_id, comment_poster)
-    blog_owner, blog_title = DatabaseOperations.get_ownwer_id_and_blog_title(blog_id)
-    result = DatabaseOperations.new_notification(blog_owner, comment_poster, blog_title)
-    return result
+        token = new_comment["token"]
+
+        try:
+            idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+            comment_poster = idinfo['email'][0: idinfo['email'].index('@')]
+            print("server received blog owner and comment poster info", blog_id, comment_poster)
+            blog_owner, blog_title = DatabaseOperations.get_ownwer_id_and_blog_title(blog_id)
+            result = DatabaseOperations.new_notification(blog_owner, comment_poster, blog_title)
+            return result
+        except ValueError:
+            print("Auth went wrong!")
+            pass
 
 @app.route("/countnotification", methods=["GET"])
 def get_comment_info():

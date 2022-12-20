@@ -16,7 +16,7 @@ class DatabaseOperations:
     def _get_connection():
 
         usr = "root"
-        pw = "84443295412lx."
+        pw = "015100264"
         h = "localhost"
 
         conn = pymysql.connect(
