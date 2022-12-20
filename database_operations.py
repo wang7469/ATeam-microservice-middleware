@@ -15,10 +15,10 @@ class DatabaseOperations:
     @staticmethod
     def _get_connection():
 
-        usr = "root"
-        pw = "84443295412lx."
+        usr = "admin"
+        pw = "dbuserdbuser"
         # h = "localhost"
-        h = "subblog.csdfyku3iiif.us-east-1.rds.amazonaws.com"
+        h = "user-db.chowgm8mh4hg.us-east-1.rds.amazonaws.com"
 
         conn = pymysql.connect(
             user=usr,
